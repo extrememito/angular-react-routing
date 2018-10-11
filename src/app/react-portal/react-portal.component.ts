@@ -1,7 +1,9 @@
 import { Component, AfterViewInit, ElementRef } from '@angular/core'
+import { Store } from '@ngrx/store'
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
 
+import { State } from '../store'
 import { App } from '../customer-info/App'
 
 @Component({
@@ -9,20 +11,23 @@ import { App } from '../customer-info/App'
   template: '',
 })
 export class ReactPortalComponent implements AfterViewInit {
-  private app: HTMLElement
+  private rootFactory
+  private language: string
 
-  private language = 'en_US'
-
-  constructor(elementRef: ElementRef) { 
-    this.app = elementRef.nativeElement
-  }
+  constructor(private elementRef: ElementRef, private store: Store<State>) {}
 
   ngAfterViewInit() {
-    const RootFactory = React.createFactory(App)
-    setTimeout(() => {
-      ReactDOM.render(RootFactory({
-        language: this.language
-      }), this.app)
+    this.rootFactory = React.createFactory(App)
+    this.store.select('appState', 'language').subscribe(lang => {
+      if (this.language !== lang) {
+        ReactDOM.render(
+          this.rootFactory({
+            language: lang,
+          }),
+          this.elementRef.nativeElement,
+        )
+      }
+      this.language = lang
     })
   }
 }
