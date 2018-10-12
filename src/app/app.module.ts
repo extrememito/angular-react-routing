@@ -9,9 +9,10 @@ import { ReactPortalComponent } from './react-portal/react-portal.component'
 import { OrderTakingComponent } from './order-taking/order-taking.component'
 import { reducers } from './store'
 import { environment } from 'src/environments/environment'
+import { CustomerInfoComponent } from './customer-info/customer-info.component'
 
 @NgModule({
-  declarations: [AppComponent, ReactPortalComponent, OrderTakingComponent],
+  declarations: [AppComponent, ReactPortalComponent, OrderTakingComponent, CustomerInfoComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

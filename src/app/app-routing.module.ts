@@ -1,32 +1,32 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { OrderTakingComponent } from './order-taking/order-taking.component';
-import { ReactPortalComponent } from './react-portal/react-portal.component';
+import { NgModule } from '@angular/core'
+import { Routes, RouterModule } from '@angular/router'
+import { OrderTakingComponent } from './order-taking/order-taking.component'
+import { CustomerInfoComponent } from './customer-info/customer-info.component'
 
 const routes: Routes = [
   {
     path: '',
     redirectTo: '/angular',
-    pathMatch: 'full'
+    pathMatch: 'full',
   },
   {
-    path: 'angular',
-    component: OrderTakingComponent
+    path: 'orders',
+    component: OrderTakingComponent,
   },
   {
-    path: 'react',
+    path: 'customerInfo',
     children: [
       {
         path: '**',
-        component: ReactPortalComponent
-      }
-    ]
+        component: CustomerInfoComponent,
+      },
+    ],
   },
-  { path: '**', redirectTo:'/angular' }
-];
+  { path: '**', redirectTo: '/orders' },
+]
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class AppRoutingModule {}
