@@ -14,15 +14,17 @@ const initState: AppState = {
 
 export function appReducer(state = initState, action) {
   switch (action.type) {
-    case SET_LANGUAGE:
+    case SET_LANGUAGE: {
+      if (state.language === action.payload) {
+        return state
+      }
       return {
         ...state,
         language: action.payload
       }
+    }
     default:
-      return {
-        ...state
-      }
+      return state
   }
 }
 
